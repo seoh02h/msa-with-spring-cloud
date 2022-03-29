@@ -4,18 +4,23 @@ server:
 spring:
   application:
     name: apigateway-service
-#  cloud:
-#    gateway:
-#      routes:
-#        - id: first-service
-#          uri: http://localhost:8081/
-#          predicates:
-#            - Path= /first-service/**
-#        - id: second-service
-#          uri: http://localhost:8082/
-#          predicates:
-#            - Path= /second-service/**
-# 정보를 java 코드로 작성
+  cloud:
+    gateway:
+      routes:
+        - id: first-service
+          uri: http://localhost:8081/
+          predicates:
+            - Path= /first-service/**
+          filters:
+            - AddRequestHeader=first-request, first-request-header2
+            - AddResponseHeader=first-respone, first-response-header2
+        - id: second-service
+          uri: http://localhost:8082/
+          predicates:
+            - Path= /second-service/**
+          filters:
+            - AddRequestHeader=second-request, second-request-header2
+            - AddResponseHeader=second-respone, second-response-header2
 
 eureka:
   client:
