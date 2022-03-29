@@ -22,4 +22,9 @@ public class FirstServiceController {
     return "First Service Message";
   }
 
+  @GetMapping("/check")
+  public String check(){
+    return "First Service Check";
+  }
+
 }
