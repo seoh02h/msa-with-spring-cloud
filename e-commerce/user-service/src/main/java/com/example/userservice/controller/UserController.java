@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/")
+@RequestMapping("/user-service")
 public class UserController {
 
   private Environment env;
@@ -27,21 +27,16 @@ public class UserController {
 
   @Autowired
   public UserController(Environment env, UserService userService){
+    this.env = env;
     this.userService = userService;
   }
-
-//  private Environment env;
-//
-//  public UserController(Environment env) {
-//    this.env = env;
-//  } --> Greeting
 
   @Autowired
   private Greeting greeting;
 
   @GetMapping("/health_check")
   public String status(){
-    return "It's working in user service";
+    return String.format("It's Working in User Service on PORT %s", env.getProperty("local.server.port"));
   }
 
   @GetMapping("/welcome")
